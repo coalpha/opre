@@ -26,7 +26,14 @@ public interface Option<T> {
       return new Some<>(val);
    }
 
-   public static <none_t> None<none_t> None() {
+   public static <dummy_t> None<dummy_t> None() {
       return new None<>();
-   };
+   }
+
+   public static <T> Option<T> fromNullable(T val) {
+      if (val == null) {
+         return new None<>();
+      }
+      return new Some<>(val);
+   }
 }

@@ -1,13 +1,21 @@
-import op.*;
-import static op.Option.*;
+import static opre.re.Result.*;
 
 public class Test {
    public static void main(String[] args) {
-      Option<Integer> a = None();
-      Some<Integer> b = Some(3);
-      a.inside(i -> {
-         System.out.println(i);
+      var r = trycatch(() -> {
+         if (Math.random() > .5) {
+            throw new RuntimeException("haha");
+         } else {
+            return 1;
+         }
       });
-      b.unwrap();
+      r.fork(
+         i -> {
+         
+         },
+         s -> {
+         
+         }
+      );
    }
 }

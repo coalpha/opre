@@ -24,13 +24,23 @@ public interface Result<ok_t, err_t> {
    // my methods
    public void consume(Consumer<ok_t> scope);
 
+   public void consume2(Consumer<ok_t> some, Consumer<err_t> none);
+
    public <U> U fork(Function<ok_t, U> some, Function<err_t, U> none);
 
-   public static <ok_t> Ok<ok_t> Ok(ok_t val) {
+   public static <ok_t, dummy_t> Ok<ok_t, dummy_t> Ok(ok_t val) {
       return new Ok<>(val);
    }
 
-   public static <err_t> Err<err_t> Err(err_t val) {
+   public static <dummy_t, err_t> Err<dummy_t, err_t> Err(err_t val) {
       return new Err<>(val);
-   };
+   }
+
+   public static <ok_t> Result<ok_t, String> trycatch(Supplier<ok_t> fn) {
+      try {
+         return new Ok<>(fn.get());
+      } catch (Throwable e) {
+         return new Err<>(e.toString());
+      }
+   }
 }

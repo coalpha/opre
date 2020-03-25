@@ -42,8 +42,8 @@ public class Some<some_t> implements Option<some_t> {
    }
 
    @Override
-   public void consume(Consumer<some_t> scope) {
-      scope.accept(this.val);
+   public void consume(Consumer<some_t> fn) {
+      fn.accept(this.val);
    }
 
    public <U> Option<U> map(Function<some_t, U> fn) {
