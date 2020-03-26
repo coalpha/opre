@@ -1,4 +1,4 @@
-package opre.op;
+package opre;
 
 import java.util.function.Supplier;
 import java.util.function.Consumer;

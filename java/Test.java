@@ -4,18 +4,11 @@ public class Test {
    public static void main(String[] args) {
       var r = trycatch(() -> {
          if (Math.random() > .5) {
-            throw new RuntimeException("haha");
+            throw new Throwable("haha");
          } else {
             return 1;
          }
       });
-      r.fork(
-         i -> {
-         
-         },
-         s -> {
-         
-         }
-      );
+      r.consume2(System.out::println, System.out::println);
    }
 }

@@ -1,6 +1,6 @@
-package opre.re;
+package opre;
 
-import opre.op.*;
+import opre.*;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

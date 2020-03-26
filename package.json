@@ -1,0 +1,7 @@
+{
+   "name": "orpe",
+   "version": "0.0.1",
+   "keywords": ["option", "optional", "result", "port", "monad"],
+   "author": "Cole Gannon",
+   "license": "MIT"
+}
