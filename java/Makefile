@@ -1,6 +1,8 @@
-test:
-	javac Test.java
+test: compile
 	java Test
+
+compile:
+	javac Test.java
 
 jar:
 	mkdir dist
@@ -11,4 +13,4 @@ clean:
 	find . -type f -name "*.class"
 	find . -type f -name "*.class" -delete
 
-.PHONY: test jar clean
+.PHONY: test jar clean compile

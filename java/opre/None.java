@@ -59,11 +59,16 @@ public class None<dummy_t> implements Option<dummy_t> {
    }
 
    @Override
-   public void consume(Consumer<dummy_t> drop) {}
+   public void if_some(Consumer<dummy_t> drop) {}
 
    @Override
-   public void consume2(Consumer<dummy_t> drop, Runnable none) {
-      none.run();
+   public void if_none(Runnable fn) {
+      fn.run();
+   }
+
+   @Override
+   public void with_both(Consumer<dummy_t> drop, Runnable fn) {
+      fn.run();
    }
 
    @Override

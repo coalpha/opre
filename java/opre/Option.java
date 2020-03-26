@@ -21,9 +21,11 @@ public interface Option<T> {
    String toString();
 
    // my methods
-   void consume(Consumer<T> scope);
+   void if_some(Consumer<T> some);
 
-   void consume2(Consumer<T> some, Runnable none);
+   void if_none(Runnable none);
+
+   void with_both(Consumer<T> some, Runnable none);
 
    <U> U fork(Function<T, U> some, Supplier<U> none);
 

@@ -54,13 +54,16 @@ public class Some<some_t> implements Option<some_t> {
    }
 
    @Override
-   public void consume(Consumer<some_t> fn) {
+   public void if_some(Consumer<some_t> fn) {
       fn.accept(this.val);
    }
 
    @Override
-   public void consume2(Consumer<some_t> some, Runnable drop) {
-      some.accept(this.val);
+   public void if_none(Runnable drop) {}
+
+   @Override
+   public void with_both(Consumer<some_t> fn, Runnable drop) {
+      fn.accept(this.val);
    }
 
    @Override

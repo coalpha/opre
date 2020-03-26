@@ -73,10 +73,15 @@ public class Err<dummy_t, err_t> implements Result<dummy_t, err_t> {
    }
 
    @Override
-   public void consume(Consumer<dummy_t> drop) {}
+   public void if_ok(Consumer<dummy_t> drop) {}
 
    @Override
-   public void consume2(Consumer<dummy_t> drop, Consumer<err_t> fn) {
+   public void if_err(Consumer<err_t> fn) {
+      fn.accept(this.val);
+   }
+
+   @Override
+   public void with_both(Consumer<dummy_t> drop, Consumer<err_t> fn) {
       fn.accept(this.val);
    }
 

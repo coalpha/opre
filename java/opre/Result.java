@@ -22,11 +22,13 @@ public interface Result<ok_t, err_t> {
    String toString();
 
    // my methods
-   void consume(Consumer<ok_t> scope);
+   void if_ok(Consumer<ok_t> ok);
+
+   void if_err(Consumer<err_t> err);
+
+   void with_both(Consumer<ok_t> ok, Consumer<err_t> err);
    
-   void consume2(Consumer<ok_t> some, Consumer<err_t> none);
-   
-   <U> U fork(Function<ok_t, U> some, Function<err_t, U> none);
+   <U> U fork(Function<ok_t, U> ok, Function<err_t, U> err);
    
    static <ok_t, dummy_t> Ok<ok_t, dummy_t> Ok(ok_t val) {
       return new Ok<>(val);
@@ -35,12 +37,12 @@ public interface Result<ok_t, err_t> {
    static <dummy_t, err_t> Err<dummy_t, err_t> Err(err_t val) {
       return new Err<>(val);
    }
-   
-   static <ok_t> Result<ok_t, String> trycatch(ThrowingSupplier<ok_t> fn) {
+
+   static <ok_t> Result<ok_t, Throwable> trycatch(ThrowingSupplier<ok_t> fn) {
       try {
          return new Ok<>(fn.get());
       } catch (Throwable e) {
-         return new Err<>(e.toString());
+         return new Err<>(e);
       }
    }
 }

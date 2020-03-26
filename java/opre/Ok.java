@@ -65,12 +65,15 @@ public class Ok<ok_t, dummy_t> implements Result<ok_t, dummy_t> {
    }
 
    @Override
-   public void consume(Consumer<ok_t> fn) {
+   public void if_ok(Consumer<ok_t> fn) {
       fn.accept(this.val);
    }
 
    @Override
-   public void consume2(Consumer<ok_t> fn, Consumer<dummy_t> drop) {
+   public void if_err(Consumer<dummy_t> drop) {}
+
+   @Override
+   public void with_both(Consumer<ok_t> fn, Consumer<dummy_t> drop) {
       fn.accept(this.val);
    }
 
