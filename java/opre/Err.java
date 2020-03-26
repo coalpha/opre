@@ -1,7 +1,5 @@
 package opre;
 
-import opre.*;
-
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
@@ -25,7 +23,7 @@ public class Err<dummy_t, err_t> implements Result<dummy_t, err_t> {
 
    @Override
    public None<dummy_t> ok() {
-      return new None<dummy_t>();
+      return Option.None();
    }
 
    @Override
@@ -64,6 +62,14 @@ public class Err<dummy_t, err_t> implements Result<dummy_t, err_t> {
    @SuppressWarnings("unchecked")
    public <U> Result<U, err_t> map(Function<dummy_t, U> drop) {
       return (Result<U, err_t>) this;
+   }
+
+   @Override
+   public String toString() {
+      var sb = new StringBuilder("Err(");
+      sb.append(this.val.toString());
+      sb.append(')');
+      return sb.toString();
    }
 
    @Override

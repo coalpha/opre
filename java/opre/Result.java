@@ -18,7 +18,9 @@ public interface Result<ok_t, err_t> {
    ok_t unwrap_or(ok_t def);
    ok_t unwrap_or_else(Supplier<ok_t> fn);
    <U> Result<U, err_t> map(Function<ok_t, U> fn);
-   
+
+   String toString();
+
    // my methods
    void consume(Consumer<ok_t> scope);
    
@@ -34,7 +36,7 @@ public interface Result<ok_t, err_t> {
       return new Err<>(val);
    }
    
-   static <ok_t> Result<ok_t, String> trycatch(Supplier<ok_t> fn) {
+   static <ok_t> Result<ok_t, String> trycatch(ThrowingSupplier<ok_t> fn) {
       try {
          return new Ok<>(fn.get());
       } catch (Throwable e) {

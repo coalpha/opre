@@ -28,7 +28,7 @@ public class Ok<ok_t, dummy_t> implements Result<ok_t, dummy_t> {
 
    @Override
    public Option<dummy_t> err() {
-      return new None<dummy_t>();
+      return Option.None();
    }
 
    @Override
@@ -54,6 +54,14 @@ public class Ok<ok_t, dummy_t> implements Result<ok_t, dummy_t> {
    @Override
    public <U> Result<U, dummy_t> map(Function<ok_t, U> fn) {
       return new Ok<U, dummy_t>(fn.apply(this.val));
+   }
+
+   @Override
+   public String toString() {
+      var sb = new StringBuilder("Ok(");
+      sb.append(this.val.toString());
+      sb.append(')');
+      return sb.toString();
    }
 
    @Override

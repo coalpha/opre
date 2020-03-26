@@ -5,6 +5,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class None<dummy_t> implements Option<dummy_t> {
+   /** A pointer to the only None instance */
+   public static final Object ptr = new None<>();
+
+   None() {}
+
    @Override
    public boolean is_some() {
       return false;
@@ -49,10 +54,25 @@ public class None<dummy_t> implements Option<dummy_t> {
    }
 
    @Override
+   public String toString() {
+      return "None";
+   }
+
+   @Override
    public void consume(Consumer<dummy_t> drop) {}
+
+   @Override
+   public void consume2(Consumer<dummy_t> drop, Runnable none) {
+      none.run();
+   }
 
    @Override
    public <U> U fork(Function<dummy_t, U> drop, Supplier<U> fn) {
       return fn.get();
-   };
+   }
+
+   @Override
+   public Object val_ptr() {
+      return (Object) this;
+   }
 }

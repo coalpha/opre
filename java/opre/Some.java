@@ -42,16 +42,34 @@ public class Some<some_t> implements Option<some_t> {
    }
 
    @Override
+   public <U> Option<U> map(Function<some_t, U> fn) {
+      return new Some<U>(fn.apply(this.val));
+   }
+   @Override
+   public String toString() {
+      var sb = new StringBuilder("Some(");
+      sb.append(this.val.toString());
+      sb.append(')');
+      return sb.toString();
+   }
+
+   @Override
    public void consume(Consumer<some_t> fn) {
       fn.accept(this.val);
    }
 
-   public <U> Option<U> map(Function<some_t, U> fn) {
-      return new Some<U>(fn.apply(this.val));
+   @Override
+   public void consume2(Consumer<some_t> some, Runnable drop) {
+      some.accept(this.val);
    }
 
    @Override
    public <U> U fork(Function<some_t, U> fn, Supplier<U> drop) {
       return fn.apply(this.val);
-   };
+   }
+
+   @Override
+   public Object val_ptr() {
+      return (Object) this.val;
+   }
 }

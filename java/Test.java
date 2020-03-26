@@ -1,14 +1,27 @@
-import static opre.re.Result.*;
+import opre.*;
+import static opre.Option.*;
 
 public class Test {
    public static void main(String[] args) {
-      var r = trycatch(() -> {
+      Test.throwInLambda();
+      Test.pointerComparison();
+   }
+
+   static void throwInLambda() {
+      var res = Result.trycatch(() -> {
          if (Math.random() > .5) {
-            throw new Throwable("haha");
+            return "oh yes!";
          } else {
-            return 1;
+            throw new Throwable("oh no!");
          }
       });
-      r.consume2(System.out::println, System.out::println);
+      System.out.println(res);
+   }
+
+   static void pointerComparison() {
+      Integer i = 10;
+      Option<Integer> o0 = Some(i);
+      Option<Integer> o1 = Some(i);
+      System.out.println(o0.val_ptr() == o1.val_ptr());
    }
 }

@@ -1,5 +1,5 @@
 package opre;
 
-interface SupplierCanThrow<T> {
+public interface ThrowingSupplier<T> {
    public T get() throws Throwable;
 }

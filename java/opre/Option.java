@@ -1,5 +1,6 @@
 package opre;
 
+import java.lang.Runnable;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -17,17 +18,28 @@ public interface Option<T> {
    T unwrap_or_else(Supplier<T> fn);
    <U> Option<U> map(Function<T, U> fn);
 
+   String toString();
+
    // my methods
    void consume(Consumer<T> scope);
 
+   void consume2(Consumer<T> some, Runnable none);
+
    <U> U fork(Function<T, U> some, Supplier<U> none);
+
+   /**
+    * If Some, a pointer to the wrapped value.
+    * If None, a pointer to this.
+    */
+   Object val_ptr();
 
    static <some_t> Some<some_t> Some(some_t val) {
       return new Some<>(val);
    }
 
+   @SuppressWarnings("unchecked")
    static <dummy_t> None<dummy_t> None() {
-      return new None<>();
+      return (None<dummy_t>) None.ptr;
    }
 
    static <T> Option<T> fromAny(T val) {
