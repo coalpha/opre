@@ -1,10 +1,21 @@
+package test;
+
 import opre.*;
 import static opre.Option.*;
 
 public class Test {
+   Test() {
+      main();
+   }
+
+   void main() {
+      new Panic("Test Panic").run();
+   }
+
    public static void main(String[] args) {
       Test.throwInLambda();
       Test.pointerComparison();
+      new Test();
    }
 
    static void throwInLambda() {

@@ -22,12 +22,7 @@ public class None<dummy_t> implements Option<dummy_t> {
 
    @Override
    public dummy_t expect(String msg) {
-      try {
-         throw new RuntimeException(msg);
-      } catch (RuntimeException e) {
-         e.printStackTrace();
-         System.exit(1);
-      }
+      new Panic(msg).run();
       return null;
    }
 

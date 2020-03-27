@@ -1,5 +1,6 @@
-test: compile
-	java Test
+test:
+	javac test/Test.java
+	java test.Test
 
 compile:
 	javac Test.java

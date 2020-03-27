@@ -33,12 +33,7 @@ public class Err<dummy_t, err_t> implements Result<dummy_t, err_t> {
 
    @Override
    public dummy_t expect(String msg) {
-      try {
-         throw new RuntimeException(msg);
-      } catch (RuntimeException e) {
-         e.printStackTrace();
-         System.exit(1);
-      }
+      new Panic(msg).run();
       return null;
    }
 
