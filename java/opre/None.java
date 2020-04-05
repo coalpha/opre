@@ -22,7 +22,7 @@ public class None<dummy_t> implements Option<dummy_t> {
 
    @Override
    public dummy_t expect(String msg) {
-      new Panic(msg).run();
+      Panic.Panic(msg);
       return null;
    }
 

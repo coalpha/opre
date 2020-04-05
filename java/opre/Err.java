@@ -33,7 +33,7 @@ public class Err<dummy_t, err_t> implements Result<dummy_t, err_t> {
 
    @Override
    public dummy_t expect(String msg) {
-      new Panic(msg).run();
+      Panic.Panic(msg);
       return null;
    }
 

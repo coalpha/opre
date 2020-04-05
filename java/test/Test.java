@@ -2,18 +2,20 @@ package test;
 
 import opre.*;
 import static opre.Option.*;
+import static opre.Panic.Panic;
 
 public class Test {
    Test() {
-      main();
+      panicfn();
    }
 
-   void main() {
-      new Panic("Test Panic").run();
+   void panicfn() {
+      Panic("Test Panic");
    }
 
    public static void main(String[] args) {
       Test.throwInLambda();
+      Test.ignoreError();
       Test.pointerComparison();
       new Test();
    }
@@ -27,6 +29,11 @@ public class Test {
          }
       });
       System.out.println(res);
+   }
+
+   static void ignoreError() {
+      Result.ignore(() -> { throw new Throwable("yike!"); });
+      System.out.println("ignored an error");
    }
 
    static void pointerComparison() {

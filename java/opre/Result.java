@@ -45,4 +45,10 @@ public interface Result<ok_t, err_t> {
          return new Err<>(e);
       }
    }
+
+   static void ignore(ThrowingRunnable fn) {
+      try {
+         fn.run();
+      } catch (Throwable e) {}
+   }
 }

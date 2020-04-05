@@ -1,17 +1,24 @@
 package opre;
 
-@SuppressWarnings("serial")
-public class Panic extends Error implements Runnable {
-   public Panic(String msg) {
-      super(msg == null ? "" : msg);
+public interface Panic {
+   /** Never returns */
+   public static void Panic() {
+      System.err.println("Panic: ");
+      var stackTrace = Thread.currentThread().getStackTrace();
+      var stackLength = stackTrace.length;
+      for (var i = 2; i < stackLength; i++) {
+         System.err.println("   at " + stackTrace[i].toString());
+      }
+      System.exit(1);
    }
 
-   @Override
-   public void run() {
-      System.out.println("Panic: " + super.getMessage());
-      var stackTrace = super.getStackTrace();
-      for (var element : stackTrace) {
-         System.err.println("   at " + element.toString());
+   /** Never returns */
+   public static void Panic(String msg) {
+      System.err.println("Panic: " + msg);
+      var stackTrace = Thread.currentThread().getStackTrace();
+      var stackLength = stackTrace.length;
+      for (var i = 2; i < stackLength; i++) {
+         System.err.println("   at " + stackTrace[i].toString());
       }
       System.exit(1);
    }
