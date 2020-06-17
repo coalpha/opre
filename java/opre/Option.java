@@ -6,8 +6,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * Rust's <code>std::Option</code> ported to Java
+ * Rust's <code>std::Option</code> and <code>std::Result</code> ported to Java
  * @see https://doc.rust-lang.org/std/option/enum.Option.html
+ * @see https://doc.rust-lang.org/std/result/enum.Result.html
  */
 public interface Option<T> {
    boolean is_some();
